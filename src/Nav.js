@@ -19,6 +19,7 @@ export default ()=> {
             <ul className="nav navbar-nav" />
             <ul className="nav navbar-nav navbar-right">
                 <li><Link to="/">Home</Link></li>
+                <li><Link to="/movies">Movies</Link></li>
                 <li><Link to="/currencyconvertor">Currency Convertor</Link></li>
                 <li><Link to="/box">Boxes</Link></li>
                 <li><Link to="/random">Random</Link></li>

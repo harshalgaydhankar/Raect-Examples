@@ -1,12 +1,13 @@
 import React from 'react';
 import Axios from 'axios';
-import Jsonp from 'jsonp'
+import Jsonp from 'jsonp';
+// import LineChart from 'react-chartjs.Line';
 
 export default class CurrencyConvertor extends React.Component{
   constructor(props){
     super(props);
-    this.state = {result : 0};
-    this.state = {ratio : 0};
+    
+    this.state = {ratio : 0,result : 0};
     this.state = {currency: []}
     this.go = this.go.bind(this);
   }
