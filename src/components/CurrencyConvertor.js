@@ -63,27 +63,19 @@ export default class CurrencyConvertor extends React.Component{
         <h1>Currency Convertor</h1>
         
         From :
-       
-            {
-               <select ref={from => this.from = from} >
+        {
+            <select ref={from => this.from = from} >
               {Object.keys(this.state.currency).map((t,i) => <option key={i} value={t}>{t}</option>)};
-              </select>
-              
-            }
+            </select>      
+        }
         
-
         To : 
-        <select ref={to => this.to = to} >
-            <option value="USD">USD</option>
-            <option value="INR">INR</option>
-            <option value="AUD">AUD</option>
-            <option value="BGN">BGN</option>
-            <option value="BRL">BRL</option>
-            <option value="CAD">CAD</option>
-            <option value="CHF">CHF</option>
-            <option value="CNY">CNY</option>
-            <option value="CZK">CZK</option>            
-        </select>
+        {
+            <select ref={to => this.to = to} >
+              {Object.keys(this.state.currency).map((t,i) => <option key={i} value={t}>{t}</option>)};
+            </select>
+        }
+        
         <input ref={node => this.number = node} type="number"/>
         <button className="btn btn-danger btn-xs" onClick={this.go}>Go..!</button>
         <div />
