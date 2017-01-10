@@ -66,10 +66,10 @@ componentDidMount(){
            padding: "20px",
              margin: "20px"
         };
-
+        var clr = {color: "#FFFFFF"};
     return (
       <div>
-        <div class="jumbotron">
+        <div class="jumbotron" style={clr}>
           <h1>Movies Watch List!</h1>
           <p>Search your movies and add them to the movies watched list</p>
         </div>
