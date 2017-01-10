@@ -106,6 +106,8 @@ componentDidMount(){
 
             </table>
 
+            
+            <h1> Movies already selected </h1>
             <table className="table table-striped">
             <thead>
               <tr>
