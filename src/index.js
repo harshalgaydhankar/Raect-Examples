@@ -7,7 +7,7 @@ import About from "./components/About";
 import Faq from "./components/Faq";
 import Boxes from "./components/Boxes/Boxes";
 import Random from "./components/Random";
-
+import CurrencyConvertor from "./components/CurrencyConvertor";
 
 ReactDOM.render(
   <Router history={browserHistory}>
@@ -17,6 +17,7 @@ ReactDOM.render(
       <Route path="box" component={Boxes}/>
       <Route path="about" component={About}/>
       <Route path="faq" component={Faq}/>
+      <Route path="currencyconvertor" component={CurrencyConvertor}/>
     </Route>
   </Router>,
   document.getElementById('root')
