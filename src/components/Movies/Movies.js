@@ -66,6 +66,7 @@ componentDidMount(){
            padding: "20px",
              margin: "20px"
         };
+        
         var clr = {color: "#FFFFFF"};
     return (
       <div>
