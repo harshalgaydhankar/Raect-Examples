@@ -3,7 +3,7 @@ import {Link, browserHistory} from 'react-router';
 
 export default ()=> {
     return(
-       <nav className="navbar navbar-default">
+       <nav className="navbar navbar-inverse">
         <div className="container-fluid">
             <div className="navbar-header">
             <button type="button" className="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
@@ -20,6 +20,7 @@ export default ()=> {
             <ul className="nav navbar-nav navbar-right">
                 <li><Link to="/">Home</Link></li>
                 <li><Link to="/box">Boxes</Link></li>
+                <li><Link to="/random">Random</Link></li>
                 <li><Link to="/about">About</Link></li>
                 <li><Link to="/faq">Faq</Link></li>
             </ul>

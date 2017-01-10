@@ -6,12 +6,14 @@ import Home from "./components/Home";
 import About from "./components/About";
 import Faq from "./components/Faq";
 import Boxes from "./components/Boxes/Boxes";
+import Random from "./components/Random";
 
 
 ReactDOM.render(
   <Router history={browserHistory}>
     <Route path="/" component={App}> 
     <IndexRoute component ={Home}/>
+      <Route path="random" component={Random}/>
       <Route path="box" component={Boxes}/>
       <Route path="about" component={About}/>
       <Route path="faq" component={Faq}/>
