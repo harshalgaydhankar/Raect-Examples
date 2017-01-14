@@ -13,7 +13,7 @@ export default class Movies extends React.Component{
     this.add = this.add.bind(this);
   }
  
-
+//coponent did mount event of the react js life cycle
 componentDidMount(){
     this.db.allDocs({
       include_docs: true,
@@ -26,8 +26,7 @@ componentDidMount(){
     });
   }
 
-
-
+//add button for adding data to puch db
  add(event){
     const title = event.target.parentNode.parentNode.querySelector('.title').textContent;
     const year = event.target.parentNode.parentNode.querySelector('.year').textContent;
@@ -44,6 +43,7 @@ componentDidMount(){
     });
   }
 
+//search button
   go(){
      
         const movie = this.movie.value;
@@ -60,6 +60,7 @@ componentDidMount(){
        console.log("i clicked")
   }
 
+//rendering the html
   render(){
         var divStyle = {
           background: "#eee",
