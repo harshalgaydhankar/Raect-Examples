@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDom from 'react-dom';
 import PouchDB from 'pouchdb';
 import './ToDo.css';
+import './popup.css';
 import Popup from 'react-popup';
 
 export default class ToDo extends React.Component{
@@ -61,11 +62,12 @@ export default class ToDo extends React.Component{
     }
 
     postpone(event){
+       
         const taskName = event.target.parentNode.parentNode.querySelector('.taskName').textContent;
         this.state.tasks.forEach((task)=>{
             if(task.doc._id === taskName){
                 const doc = task.doc
-                Popup.prompt('','Enter New Deadline', {
+                Popup.prompt('Change Deadline','Enter New Deadline', {
                     type: 'date'
                 }, {
                     text: 'Postpone Task',
@@ -121,7 +123,7 @@ export default class ToDo extends React.Component{
                     <td>{task.doc.createdDate.split('T')[0]}</td>
                     <td>
                         <button onClick={this.removeTask} className="btn btn-success btn-sm">Completed</button>
-                        &nbsp;<button onClick={this.postpone} className="btn btn-success btn-sm">postpone</button>
+                        &nbsp;<button onClick={this.postpone} className="btn btn-success btn-sm">Postpone</button>
                     </td>
                 </tr>
                 );
@@ -185,57 +187,77 @@ export default class ToDo extends React.Component{
                 );
         })
 
+        const totalTask = this.state.tasks.length
+        var taskCompleted = 0
+        this.state.tasks.forEach((task)=>{
+            if(task.doc.active == false){
+                taskCompleted++
+            }
+        })
+
+        var progress = Math.ceil((taskCompleted/totalTask)*100)
+
         return (
             
             <div>
+        
                 <div className="page-header">
-                    <h4>ToDO Task List!</h4>
+                    <h3>ToDO Task List!</h3>
                     <p>Add your tasks in your ToDo Priority List</p>
                 </div>
-                <div className="col-md-4"> 
-                    <div>
-                        <h5>New Task</h5>
-                        <div className = "input-group input-group-sm marginToDiv">
-                            <span className="input-group-addon">Task :</span>
-                            <input type="text" ref={node => this.task = node} className="form-control"/>
-                        </div>
-                        <div className = "input-group input-group-sm marginToDiv">
-                            <span className="input-group-addon">Deadline :</span>
-                            <input ref={node => this.deadline = node} type="date" className="form-control"/>
-                        </div>
-                        
-                        <div className = "input-group-btn input-group-sm">
+                <div className="row">
+                    <div className="col-md-4"> 
+                        <div>
+                            <h3>New Task</h3>
+                            <div className = "input-group input-group-sm marginToDiv">
+                                <span className="input-group-addon">Task :</span>
+                                <input type="text" ref={node => this.task = node} className="form-control"/>
+                            </div>
+                            <div className = "input-group input-group-sm marginToDiv">
+                                <span className="input-group-addon">Deadline :</span>
+                                <input ref={node => this.deadline = node} type="date" className="form-control"/>
+                            </div>
                             
-                            <button className="btn btn-danger btn-xs marginToDiv" onClick={this.go}>Add to List</button>
+                            <div className = "input-group-btn input-group-sm">
+                                
+                                <button className="btn btn-danger btn-xs marginToDiv" onClick={this.go}>Add to List</button>
+                            </div>
                         </div>
-                        
-                        
+
+                            <h4> Task Progress </h4>
+                            <div className="progress">
+                                <div className="progress-bar progress-bar-success progress-bar-striped" role="progressbar"  aria-valuemin="0" aria-valuemax="100" style={{"width": progress+"%"}}>
+                                    {progress}%
+                                    <span className="sr-only">{progress}% Complete (success)</span>
+                                </div>
+                            </div>
+                    </div>
+                    <div className="col-md-8">
+                        <h3>Upcoming ToDO's</h3>
+                        <table className="table table-hover table-inverse">
+                            <thead>
+                                <tr>
+                                    <th>Task</th>
+                                    <th>Task Deadline</th>
+                                    <th>Task Created On</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {todaysTask}
+                                {futureTask}  
+                                {pastTask}    
+                                
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    
+                    <Popup/>
                     </div>
                 </div>
-                <div className="col-md-8">
-                    <h3>Upcoming ToDO's</h3>
-                    <table className="table table-hover table-inverse">
-                        <thead>
-                            <tr>
-                                <th>Task</th>
-                                <th>Task Deadline</th>
-                                <th>Task Created On</th>
-                                <th>Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {todaysTask}
-                            {futureTask}  
-                            {pastTask}    
-                            
-                        </tbody>
-                    </table>
-                </div>
-                <div>
-                    <Popup />
-                </div>
                 
-                <div>
+                <div className="row">
                     <h3>Task Done</h3>
                     <table className="table table-hover table-inverse">
                         <thead>
@@ -251,6 +273,7 @@ export default class ToDo extends React.Component{
                     </table>
 
                 </div>
+                
             </div>
         )
     }

@@ -5,10 +5,12 @@
   "devDependencies": {
     "axios": "^0.15.3",
     "phantomjs": "^2.1.7",
+    "qrcode-npm": "0.0.3",
     "react-scripts": "0.8.5"
   },
   "dependencies": {
     "axios": "^0.15.3",
+    "chart.js": "^1.1.1",
     "jsonp": "^0.2.1",
     "pouchdb": "^6.1.1",
     "react": "^15.4.2",
