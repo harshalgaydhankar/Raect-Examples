@@ -23,8 +23,7 @@ export default ()=> {
                 <li><Link to="/currencyconvertor">Currency Convertor</Link></li>
                 <li><Link to="/box">Boxes</Link></li>
                 <li><Link to="/random">Random</Link></li>
-                <li><Link to="/about">About</Link></li>
-                <li><Link to="/faq">Faq</Link></li>
+                <li><Link to="/todo">toDo Tasks</Link></li>
             </ul>
             </div>
         </div>

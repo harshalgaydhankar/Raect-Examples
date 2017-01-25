@@ -1,5 +1,4 @@
 import React from 'react';
-import Axios from 'axios';
 import Jsonp from 'jsonp';
 // import LineChart from 'react-chartjs.Line';
 
@@ -37,7 +36,7 @@ export default class CurrencyConvertor extends React.Component{
         } else {
             console.log(data.rates)
             for(var key in data.rates) {
-              if(key == to){
+              if(key === to){
                 var ratio = data.rates[key];
                 const result = input * ratio;
                 this.setState({ratio});

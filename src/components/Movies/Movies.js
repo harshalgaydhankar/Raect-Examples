@@ -106,7 +106,7 @@ componentDidMount(){
                                         <td className="title">{r.Title}</td>
                                         <td className="type">{r.Type}</td>
                                         <td className="year">{r.Year}</td>
-                                        <td><img className="poster" height="100px" width="80px" src={r.Poster}/></td>
+                                        <td><img className="poster" height="100px" width="80px" src={r.Poster} alt=""/></td>
                                     </tr>
                                 );
                             })                          
@@ -132,7 +132,7 @@ componentDidMount(){
                         <tr key={i}>
                           <td>{r.doc._id}</td>
                           <td>{r.doc.year}</td>
-                          <td><img height="100px" width="80px" src={r.doc.poster}/></td>
+                          <td><img height="100px" width="80px" src={r.doc.poster} alt=""/></td>
                         </tr>
                       );
                     })
