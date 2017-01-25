@@ -13,8 +13,9 @@ export default class ToDo extends React.Component{
         this.reloadTask = this.reloadTask.bind(this)
         this.postpone = this.postpone.bind(this)
         this.removeTask = this.removeTask.bind(this)
+        
     }
-
+    
     go(){
         const taskName = this.task.value
         const deadline = this.deadline.value
@@ -59,19 +60,29 @@ export default class ToDo extends React.Component{
         this.reloadTask()
     }
 
-    postpone(){
-        //console.log("i am here in postpone")
+    postpone(event){
+        const taskName = event.target.parentNode.parentNode.querySelector('.taskName').textContent;
+        this.state.tasks.forEach((task)=>{
+            if(task.doc._id === taskName){
+                const doc = task.doc
+                Popup.prompt('','Enter New Deadline', {
+                    type: 'date'
+                }, {
+                    text: 'Postpone Task',
+                    action: (Box) => {
+                        doc.deadline = Box.value
+                        this.db.put(doc).then(rsp => {
+                            this.reloadTask()
+                        }).catch(function (err) {
+                            console.log(err)
+                        });
+                        Box.close()
+                }
+                });
+            }
+        })
         
-        // <Popup
-        //     className="mm-popup"
-        //     btnClass="mm-popup__btn"
-        //     closeBtn={true}
-        //     closeHtml={null}
-        //     defaultOk="Ok"
-        //     defaultCancel="Cancel"
-        //     wildClasses={false} />
-        Popup.alert('Hello, look at me');
- 
+       
     }
 
     removeTask(event){
@@ -110,7 +121,7 @@ export default class ToDo extends React.Component{
                     <td>{task.doc.createdDate.split('T')[0]}</td>
                     <td>
                         <button onClick={this.removeTask} className="btn btn-success btn-sm">Completed</button>
-                        &nbsp;<button onClick={this.postpone} className="btn btn-success btn-sm">Postpone</button>
+                        &nbsp;<button onClick={this.postpone} className="btn btn-success btn-sm">postpone</button>
                     </td>
                 </tr>
                 );
@@ -177,21 +188,31 @@ export default class ToDo extends React.Component{
         return (
             
             <div>
-                <div className="jumbotron">
-                    <h1>ToDO Task List!</h1>
+                <div className="page-header">
+                    <h4>ToDO Task List!</h4>
                     <p>Add your tasks in your ToDo Priority List</p>
                 </div>
-                <div className="divStyle"> 
+                <div className="col-md-4"> 
                     <div>
-                        <h1>New Task</h1>
-                        <label>Task : </label>
-                        <input ref={node => this.task = node} type="text"/>
-                        <label>Deadline : </label>
-                        <input ref={node => this.deadline = node} type="date"/>
-                        <button className="btn btn-danger btn-xs" onClick={this.go}>Add to List</button>
+                        <h5>New Task</h5>
+                        <div className = "input-group input-group-sm marginToDiv">
+                            <span className="input-group-addon">Task :</span>
+                            <input type="text" ref={node => this.task = node} className="form-control"/>
+                        </div>
+                        <div className = "input-group input-group-sm marginToDiv">
+                            <span className="input-group-addon">Deadline :</span>
+                            <input ref={node => this.deadline = node} type="date" className="form-control"/>
+                        </div>
+                        
+                        <div className = "input-group-btn input-group-sm">
+                            
+                            <button className="btn btn-danger btn-xs marginToDiv" onClick={this.go}>Add to List</button>
+                        </div>
+                        
+                        
                     </div>
                 </div>
-                <div>
+                <div className="col-md-8">
                     <h3>Upcoming ToDO's</h3>
                     <table className="table table-hover table-inverse">
                         <thead>
@@ -209,8 +230,11 @@ export default class ToDo extends React.Component{
                             
                         </tbody>
                     </table>
-
                 </div>
+                <div>
+                    <Popup />
+                </div>
+                
                 <div>
                     <h3>Task Done</h3>
                     <table className="table table-hover table-inverse">
